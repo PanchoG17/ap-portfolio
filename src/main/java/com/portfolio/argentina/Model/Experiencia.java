@@ -22,8 +22,8 @@ public class Experiencia {
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private Long id;
-    private String descripcion_corta;
-    private String descripcion_larga;
+    private String titulo;
+    private String descripcion;
     private int fecha_desde;
     private int fecha_hasta;
     private String logo;

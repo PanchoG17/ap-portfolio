@@ -22,8 +22,9 @@ public class Estudio {
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private Long id;
-    private String descripcion;
     private String institucion;
+    private String titulo;
+    private String descripcion;
     private int fecha_desde;
     private int fecha_hasta;
     private String logo;

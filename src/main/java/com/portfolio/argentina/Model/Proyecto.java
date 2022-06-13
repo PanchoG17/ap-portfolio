@@ -14,15 +14,16 @@ import lombok.Setter;
 
 /**
  *
- * @author usuario
+ * @author SIT
  */
 @Getter @Setter
 @Entity
-public class Habilidad{
+public class Proyecto {
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private Long id;
+    private String titulo;
     private String descripcion;
-    private int nivel;
-    private String logo;
+    private String link;
+
 }

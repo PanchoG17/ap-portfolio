@@ -29,27 +29,15 @@ public class UserController {
     
     @Autowired
     private IUsuarioService UsuariosService;
-    
-    @GetMapping("/saludar_1/{nombre}")
-    public String saludar1(@PathVariable String nombre){
-        return "Hola " + nombre + " como andas?";
-    }
-    
-    @GetMapping("/saludar_2")
-    public String saludar2(@RequestParam String nombre,
-                           @RequestParam String apellido,
-                           @RequestParam int id ){
-        return "ID:"+id+" | Nombre: " + nombre +" "+ apellido;
-    }
-    
-    //////////////////////////////////////////////////////////////
-    
+       
+    // Get Usuarios
     @GetMapping("/usuarios/traer")
     public List<Usuario> getUsuarios(){
         
         return UsuariosService.getUsuarios();
     }
     
+    // Crear Usuario
     @PostMapping("/usuarios/crear")
     public String createUsuario(@RequestBody Usuario usuario){
         
@@ -57,27 +45,34 @@ public class UserController {
         return "Usuario creado correctamete";
     }
     
+    // Delete Usuario
     @DeleteMapping("/usuarios/eliminar/{id}")
     public String deleteUsuario(@PathVariable Long id){
         
-        ///// VALIDAR SI EXISTE
+        Usuario usuario = UsuariosService.findUsuario(id);
         
-        UsuariosService.deleteUsuario(id);
-        return "Usuario eliminado correctamente";
+        if(usuario != null){
+            UsuariosService.deleteUsuario(id);
+            return "Usuario eliminado correctamente";
+        }
+        else{
+            return "El usuario no existe";
+        }
+
     }
     
-    
-    ///// CAMBIAR A POSTMAPPING o parametros
-    
+    // Editar Usuario
     @PutMapping("/usuarios/editar/{id}")
     public Usuario editUsuario(@PathVariable Long id,
                                @RequestParam ("nombre") String nuevoNombre,
                                @RequestParam ("apellido") String nuevoApellido,
-                               @RequestParam ("edad") int nuevaEdad)
+                               @RequestParam ("foto") String nuevaFoto,
+                               @RequestParam ("titulo") String nuevoTitulo,
+                               @RequestParam ("informacion") String nuevaInformacion)
     {
         Usuario usuario = UsuariosService.findUsuario(id);
         
-        Usuario newUsuario = UsuariosService.editUsuario(usuario, nuevoNombre, nuevoApellido, nuevaEdad);
+        Usuario newUsuario = UsuariosService.editUsuario(usuario, nuevoNombre, nuevoApellido,nuevaFoto, nuevoTitulo, nuevaInformacion);
         return newUsuario;
     }
 }

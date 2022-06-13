@@ -25,39 +25,34 @@ public class UsuarioService implements IUsuarioService{
     public Usuario findUsuario(Long id) {
         Usuario usuario = usuarioRepository.findById(id).orElse(null);
         return usuario;
-        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public List<Usuario> getUsuarios() {
         List <Usuario> usuariosList = usuarioRepository.findAll();
         return usuariosList;
-        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void saveUsuario(Usuario usuario) {
         usuarioRepository.save(usuario);
-        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void deleteUsuario(Long id) {
         usuarioRepository.deleteById(id);        
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
     public Usuario editUsuario(Usuario usuario,String nombre, String apellido, String foto, String titulo, String informacion) {
         
         usuario.setNombre(nombre);
         usuario.setApellido(apellido);
         usuario.setFoto(foto);
         usuario.setTitulo(titulo);        
-        usuario.setInformacion(titulo);
-        
-        
+        usuario.setInformacion(informacion);
+                
         this.saveUsuario(usuario);
         return usuario;
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
